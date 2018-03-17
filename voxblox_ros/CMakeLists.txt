@@ -52,9 +52,9 @@ cs_add_executable(visualize_tsdf
 )
 target_link_libraries(visualize_tsdf ${PROJECT_NAME})
 
-add_library(${PROJECT_NAME}_nodelet SHARED src/voxblox_nodelet.cc)
+add_library(voxblox_nodelet SHARED src/voxblox_nodelet.cc)
 
-target_link_libraries(${PROJECT_NAME}_nodelet
+target_link_libraries(voxblox_nodelet
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )

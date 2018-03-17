@@ -25,9 +25,10 @@
   <depend>voxblox</depend>
   <depend>voxblox_msgs</depend>
   <depend>voxblox_rviz_plugin</depend>
+  <depend>nodelet</depend>
 
   <export>
-    <nodelet plugin="${prefix}/nodelet_tutorial.xml" />
+    <nodelet plugin="${prefix}/voxblox_nodelet.xml" />
   </export>
 
 </package>

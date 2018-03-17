@@ -903,6 +903,11 @@ void VoxbloxNode::updateMeshEvent(const ros::TimerEvent& /*event*/) {
 
   publish_mesh_timer.Stop();
 }
+}  // namespace voxblox
+
+namespace voxblox_nodelet {
+
+using namespace voxblox;
 
 class VoxbloxNodelet : public nodelet::Nodelet
 {
@@ -928,7 +933,8 @@ public:
   }
 };
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(VoxbloxNodelet, nodelet::Nodelet)
+}
 
-}  // namespace voxblox
+#include <pluginlib/class_list_macros.h>
+PLUGINLIB_EXPORT_CLASS(voxblox_nodelet::VoxbloxNodelet, nodelet::Nodelet)
+

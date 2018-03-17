@@ -1,0 +1,5 @@
+<library path="lib/libvoxblox_nodelet">
+  <class name="voxblox_ros/VoxbloxNodelet" type="voxblox_nodelet::VoxbloxNodelet" base_class_type="nodelet::Nodelet">
+  <description>Voxblox nodelet</description>
+  </class>
+</library>
