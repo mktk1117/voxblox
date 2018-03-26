@@ -145,6 +145,7 @@ class VoxbloxNode {
   ros::Publisher occupancy_layer_pub_;
   ros::Publisher tsdf_slice_pub_;
   ros::Publisher esdf_slice_pub_;
+  ros::Publisher esdf_map_pub_;
 
   // Services.
   ros::ServiceServer generate_mesh_srv_;
@@ -251,6 +252,10 @@ VoxbloxNode::VoxbloxNode(const ros::NodeHandle& nh,
     esdf_pointcloud_pub_ =
         nh_private_.advertise<pcl::PointCloud<pcl::PointXYZI>>(
             "esdf_pointcloud", 1, true);
+
+    esdf_map_pub_ =
+        nh_private_.advertise<voxblox_msgs::Layer>("esdf_map", 1, false);
+
   }
 
   if (generate_occupancy_) {
@@ -629,6 +634,13 @@ void VoxbloxNode::publishAllUpdatedEsdfVoxels() {
 
   pointcloud.header.frame_id = world_frame_;
   esdf_pointcloud_pub_.publish(pointcloud);
+
+  // if (esdf_map_pub_.getNumSubscribers() > 0) {
+    const bool only_updated = false;
+    voxblox_msgs::Layer layer_msg;
+    serializeLayerAsMsg<EsdfVoxel>(esdf_map_->getEsdfLayer(), only_updated, &layer_msg);
+    esdf_map_pub_.publish(layer_msg);
+  // }
 }
 
 void VoxbloxNode::publishTsdfSurfacePoints() {
